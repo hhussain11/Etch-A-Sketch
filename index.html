@@ -7,27 +7,49 @@
   </head>
 
   <body>
-    <div class="grid-container">
+    <div class="reset">
+      <button class="button">Etch-A-Sketch</button>
+    </div>
+    <div class="container">
     </div>
 
     <script>
-      
-      let gridContainer = document.querySelector('.grid-container');
-      
-      for (i = 0; i < 256; i++) {
-      
-      let gridItem = document.createElement('div');
-      gridItem.classList.add('grid-item');
-      gridContainer.appendChild(gridItem);
 
-      }
-      
-      let gridItems = document.querySelectorAll('.grid-item');
-      gridItems.forEach((gridItem) => gridItem.addEventListener('mouseenter', () => gridItem.style.background = 'black'));
+      let container = document.querySelector('.container');
+      let button = document.querySelector('.button');
+      let size;
 
-      
+      button.addEventListener('click', () => size = Number(prompt('insert grid size')));
 
-      
+      function createBoxes(size) {
+
+        container.innerHTML = '';
+
+        let autos = 'auto ';
+        for (i=1; i<size; i++) {
+          autos = autos + 'auto ';
+        };
+
+        container.style.gridTemplateColumns = autos;
+
+        let numberOfBoxes = size * size
+
+        for (i = 0; i < numberOfBoxes; i++) {
+          let gridItem = document.createElement('div');
+          gridItem.classList.add('grid-item');
+          gridItem.addEventListener('mouseenter', () => gridItem.style.background = 'black');
+          container.appendChild(gridItem);
+        }
+
+      };
+
+      button.addEventListener('click', () => {
+        if (size > 100) return alert('Max grid size is 100');
+        else createBoxes(size);
+      });
+
+
+
     </script>
 
   </body>
